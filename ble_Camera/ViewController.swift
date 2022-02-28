@@ -14,6 +14,7 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     var captureSession: AVCaptureSession!
     var stillImageOutput: AVCapturePhotoOutput!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
+    @IBOutlet weak var labelArduinoData: UILabel!
     @IBOutlet weak var stateLabel: UILabel!
     @IBOutlet weak var connectButton: UIButton!
     @IBOutlet weak var labelSlider: UILabel!
@@ -26,6 +27,7 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         stateLabel.isHidden = true
         labelSlider.isHidden = true
         slider.isHidden = true
+        labelArduinoData.isHidden = true
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .photo
         guard let backCamera = AVCaptureDevice.default(for: AVMediaType.video)
@@ -63,12 +65,14 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                 stateLabel.isHidden = true
                 labelSlider.isHidden = true
                 slider.isHidden = true
+                labelArduinoData.isHidden = true
                 print("disconnected")
             }
             if(v == .connected){
                 stateLabel.isHidden = false
                 labelSlider.isHidden = false
                 slider.isHidden = false
+                labelArduinoData.isHidden = false
             }
             //self.stateManager(state: value)
             // stateView?.setStatus(con: v)
@@ -76,9 +80,11 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         }
         ble.arduinoData = {[unowned self] value in
             let v = value as Int
-            print(v)
-            
-            if (v > Int(self.slider.value)){
+            //let out = map(Float(v), 80, 400, 0, 32.4)
+            let out = map(value: v, minRange: 80, maxRange: 400, minDomain: 0, maxDomain: 32)
+            print(out)
+            labelArduinoData.text = "\(out)"
+            if (out > Int(self.slider.value)){
                 if(self.picTaken == false){
                     self.takePicture()
                     self.picTaken = true
@@ -87,8 +93,12 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                 self.picTaken = false
             }
         }
-        
     }
+    
+    func map(value:Int, minRange:Int, maxRange:Int, minDomain:Int, maxDomain:Int) -> Int {
+        return minDomain + (maxDomain - minDomain) * (value - minRange) / (maxRange - minRange)
+    }
+
     
     func setupLivePreview() {
         
@@ -113,6 +123,7 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
         print("photo taken")
         stillImageOutput.capturePhoto(with: settings, delegate: self)
+        
     }
     
     //    @IBAction func didTakePhoto(_ sender: Any) {

@@ -30,8 +30,17 @@
                                         <color key="textColor" systemColor="systemPinkColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyl-Zj-5MU">
+                                        <rect key="frame" x="86.5" y="0.0" width="40" height="104"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="A7K-Oo-Ito"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" systemColor="systemPinkColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1EN-3z-qGN">
-                                        <rect key="frame" x="86.5" y="0.0" width="52" height="104"/>
+                                        <rect key="frame" x="131.5" y="0.0" width="52" height="104"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain">
                                             <imageReference key="image" image="bolt.horizontal.fill" catalog="system" symbolScale="large"/>
@@ -42,7 +51,7 @@
                                         </connections>
                                     </button>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" minValue="0.0" maxValue="32" translatesAutoresizingMaskIntoConstraints="NO" id="YdN-Tm-EPW">
-                                        <rect key="frame" x="141.5" y="0.0" width="209.5" height="105"/>
+                                        <rect key="frame" x="186.5" y="0.0" width="164.5" height="105"/>
                                         <color key="minimumTrackTintColor" systemColor="systemPinkColor"/>
                                         <color key="maximumTrackTintColor" systemColor="systemGray2Color"/>
                                         <connections>
@@ -76,6 +85,7 @@
                     </view>
                     <connections>
                         <outlet property="connectButton" destination="1EN-3z-qGN" id="dE4-1I-80k"/>
+                        <outlet property="labelArduinoData" destination="wyl-Zj-5MU" id="hJO-yk-0kD"/>
                         <outlet property="labelSlider" destination="UAu-wm-3PP" id="gZN-fe-bpE"/>
                         <outlet property="previewView" destination="Ef3-P1-nqE" id="i2W-Pp-0vN"/>
                         <outlet property="slider" destination="YdN-Tm-EPW" id="Y0N-aZ-b3Q"/>
