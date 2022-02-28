@@ -16,18 +16,22 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
     @IBOutlet weak var stateLabel: UILabel!
     @IBOutlet weak var connectButton: UIButton!
-    
     @IBOutlet weak var labelSlider: UILabel!
     @IBOutlet weak var slider: UISlider!
+    var ble = BLEController()
+    var picTaken = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        stateLabel.isHidden = true
+        labelSlider.isHidden = true
+        slider.isHidden = true
         captureSession = AVCaptureSession()
-        captureSession.sessionPreset = .medium
+        captureSession.sessionPreset = .photo
         guard let backCamera = AVCaptureDevice.default(for: AVMediaType.video)
-            else {
-                print("Unable to access back camera!")
-                return
+        else {
+            print("Unable to access back camera!")
+            return
         }
         
         do {
@@ -43,6 +47,47 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             print("Error Unable to initialize back camera:  \(error.localizedDescription)")
         }
         // Do any additional setup after loading the view.
+        
+        
+    }
+    
+    
+    
+    func launchBLE(){
+        print("launch ble")
+        ble.connect()
+        ble.connectionChanged = { [unowned self] value in
+            let v = value as connectionStatus
+            if(v == .disconnected){
+                //self.quitCamera()
+                stateLabel.isHidden = true
+                labelSlider.isHidden = true
+                slider.isHidden = true
+                print("disconnected")
+            }
+            if(v == .connected){
+                stateLabel.isHidden = false
+                labelSlider.isHidden = false
+                slider.isHidden = false
+            }
+            //self.stateManager(state: value)
+            // stateView?.setStatus(con: v)
+            
+        }
+        ble.arduinoData = {[unowned self] value in
+            let v = value as Int
+            print(v)
+            
+            if (v > Int(self.slider.value)){
+                if(self.picTaken == false){
+                    self.takePicture()
+                    self.picTaken = true
+                }
+            }else{
+                self.picTaken = false
+            }
+        }
+        
     }
     
     func setupLivePreview() {
@@ -60,30 +105,45 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         }
     }
     
-    @IBAction func didTakePhoto(_ sender: Any) {
-            
-            let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
-            stillImageOutput.capturePhoto(with: settings, delegate: self)
-        }
+    override func viewDidAppear(_ animated: Bool) {
+        labelSlider.text = "\(slider.value)"
+    }
+    
+    func takePicture(){
+        let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
+        print("photo taken")
+        stillImageOutput.capturePhoto(with: settings, delegate: self)
+    }
+    
+    //    @IBAction func didTakePhoto(_ sender: Any) {
+    //
+    //            let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
+    //            stillImageOutput.capturePhoto(with: settings, delegate: self)
+    //        }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         
         guard let imageData = photo.fileDataRepresentation()
-            else { return }
+        else { return }
         
         let image = UIImage(data: imageData)
         //captureImageView.image = image
+        UIImageWriteToSavedPhotosAlbum(image!, self, #selector(saveCompleted), nil)
+    }
+    
+    @objc func saveCompleted(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        print("Save finished!")
     }
     
     
     @IBAction func connectAction(_ sender: Any) {
-        
+        launchBLE()
         
     }
     
     
-    @IBAction func sliderAction(_ sender: Any) {
-        
+    @IBAction func sliderAction(_ sender: UISlider) {
+        labelSlider.text = "\(Int(sender.value))"
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -91,7 +151,7 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         self.captureSession.stopRunning()
     }
     
-
-
+    
+    
 }
 

@@ -13,6 +13,7 @@
 		2F88595F27CA2F2500C16949 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F88595D27CA2F2500C16949 /* Main.storyboard */; };
 		2F88596127CA2F2700C16949 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F88596027CA2F2700C16949 /* Assets.xcassets */; };
 		2F88596427CA2F2700C16949 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F88596227CA2F2700C16949 /* LaunchScreen.storyboard */; };
+		2F88596C27CA630B00C16949 /* BLEController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F88596B27CA630B00C16949 /* BLEController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		2F88596027CA2F2700C16949 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F88596327CA2F2700C16949 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2F88596527CA2F2700C16949 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F88596B27CA630B00C16949 /* BLEController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				2F88595727CA2F2500C16949 /* AppDelegate.swift */,
 				2F88595927CA2F2500C16949 /* SceneDelegate.swift */,
 				2F88595B27CA2F2500C16949 /* ViewController.swift */,
+				2F88596B27CA630B00C16949 /* BLEController.swift */,
 				2F88595D27CA2F2500C16949 /* Main.storyboard */,
 				2F88596027CA2F2700C16949 /* Assets.xcassets */,
 				2F88596227CA2F2700C16949 /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F88595C27CA2F2500C16949 /* ViewController.swift in Sources */,
+				2F88596C27CA630B00C16949 /* BLEController.swift in Sources */,
 				2F88595827CA2F2500C16949 /* AppDelegate.swift in Sources */,
 				2F88595A27CA2F2500C16949 /* SceneDelegate.swift in Sources */,
 			);
@@ -292,6 +296,10 @@
 				DEVELOPMENT_TEAM = 4NY9EY68HK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ble_Camera/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "use bluetooth always";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "use bluetooth";
+				INFOPLIST_KEY_NSCameraUsageDescription = "use camera pls";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "access your photo album";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -320,6 +328,10 @@
 				DEVELOPMENT_TEAM = 4NY9EY68HK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ble_Camera/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "use bluetooth always";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "use bluetooth";
+				INFOPLIST_KEY_NSCameraUsageDescription = "use camera pls";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "access your photo album";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
