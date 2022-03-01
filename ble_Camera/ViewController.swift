@@ -84,7 +84,7 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             let out = map(value: v, minRange: 80, maxRange: 400, minDomain: 0, maxDomain: 32)
             print(out)
             labelArduinoData.text = "\(out)"
-            if (out > Int(self.slider.value)){
+            if (out >= Int(self.slider.value)){
                 if(self.picTaken == false){
                     self.takePicture()
                     self.picTaken = true
