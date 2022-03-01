@@ -19,6 +19,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     var orientation: AVCaptureVideoOrientation = .portrait
     let context = CIContext()
     var incomingData:Float?
+    var sliderVal:Float = 0.0
     
    // @IBOutlet weak var previewView: UIView!
     @IBOutlet weak var labelArduinoData: UILabel!
@@ -178,14 +179,18 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
         let cameraImage = CIImage(cvImageBuffer: pixelBuffer!)
        // let x = map
-        let x = map(value: self.slider.value, minRange: 0.0, maxRange: 32.0, minDomain: 0.0, maxDomain: Float(cameraImage.extent.width))
+        let bloomIntensity = map(value:self.sliderVal, minRange: 0.0, maxRange: 32.0, minDomain: 0.0, maxDomain: 3)
+        let x = map(value: self.sliderVal, minRange: 0.0, maxRange: 32.0, minDomain: 0.0, maxDomain: Float(cameraImage.extent.width))
         let v = CIVector(x: CGFloat(x), y: cameraImage.extent.height/2)
         let filter = CIFilter(name: "CIZoomBlur", parameters: ["inputImage": cameraImage,
-                                                                   "inputAmount": self.slider.value,
+                                                                   "inputAmount": self.sliderVal,
                                                                "inputCenter":v])!
        // comicEffect!.setValue(cameraImage, forKey: kCIInputImageKey)
+        let  bloom = CIFilter(name: "CIBloom", parameters: ["inputImage":filter.outputImage!,
+                                                            "inputIntensity": bloomIntensity])
         
-        let cgImage = self.context.createCGImage(filter.outputImage!, from: cameraImage.extent)!
+        
+        let cgImage = self.context.createCGImage(bloom!.outputImage!, from: cameraImage.extent)!
         
         DispatchQueue.main.async {
             let filteredImage = UIImage(cgImage: cgImage)
@@ -224,6 +229,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     @IBAction func sliderAction(_ sender: UISlider) {
         labelSlider.text = "\(Int(sender.value))"
+        sliderVal = sender.value
     }
     
     override func viewWillDisappear(_ animated: Bool) {
