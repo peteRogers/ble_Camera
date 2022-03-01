@@ -18,7 +18,7 @@ final class BLEController: NSObject, CBCentralManagerDelegate,  CBPeripheralDele
     private var token: NSKeyValueObservation?
     var characteristicDidUpdateValue: ((Bool, Data?) -> Void)?
     var connectionChanged: ((connectionStatus) -> Void)?
-    var arduinoData: ((Int) -> Void)?
+    var arduinoData: ((Float) -> Void)?
     var connecting = false
     private var central: CBCentralManager?
     private var myPeripheral: CBPeripheral?
@@ -207,7 +207,7 @@ final class BLEController: NSObject, CBCentralManagerDelegate,  CBPeripheralDele
        // print(dataString)
         let myarray = dataString!.components(separatedBy: ">")
        // print(myarray[0])
-        self.arduinoData?((Int(myarray[0]) ?? 0))
+        self.arduinoData?((Float(myarray[0]) ?? 0.0))
         
     }
     
