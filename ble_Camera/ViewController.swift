@@ -34,7 +34,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         super.viewDidLoad()
         stateLabel.isHidden = true
         labelSlider.isHidden = true
-        slider.isHidden = false
+        slider.isHidden = true
         labelArduinoData.isHidden = true
         setupDevice()
         setupInputOutput()
@@ -78,8 +78,8 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             }
             if(v == .connected){
                 stateLabel.isHidden = false
-                labelSlider.isHidden = false
-                slider.isHidden = false
+                //labelSlider.isHidden = false
+                //slider.isHidden = false
                 labelArduinoData.isHidden = false
             }
             //self.stateManager(state: value)
@@ -92,7 +92,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             //let out = map(value: v, minRange: 80, maxRange: 400, minDomain: 0, maxDomain: 32)
            // print(out)
             labelArduinoData.text = "\(v)"
-            
+            self.incomingData = v
       
         }
     }
@@ -179,11 +179,11 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
         let cameraImage = CIImage(cvImageBuffer: pixelBuffer!)
        // let x = map
-        let bloomIntensity = map(value:self.sliderVal, minRange: 0.0, maxRange: 32.0, minDomain: 0.0, maxDomain: 3)
-        let x = map(value: self.sliderVal, minRange: 0.0, maxRange: 32.0, minDomain: 0.0, maxDomain: Float(cameraImage.extent.width))
+        let bloomIntensity = map(value:self.incomingData ?? 0 * 10, minRange: 0.0, maxRange: 100, minDomain: 0.0, maxDomain: 10)
+        let x = map(value: self.incomingData ?? 0, minRange: 0.0, maxRange: 100, minDomain: 0.0, maxDomain: Float(cameraImage.extent.width))
         let v = CIVector(x: CGFloat(x), y: cameraImage.extent.height/2)
         let filter = CIFilter(name: "CIZoomBlur", parameters: ["inputImage": cameraImage,
-                                                                   "inputAmount": self.sliderVal,
+                                                               "inputAmount": self.incomingData ?? 0 * 10,
                                                                "inputCenter":v])!
        // comicEffect!.setValue(cameraImage, forKey: kCIInputImageKey)
         let  bloom = CIFilter(name: "CIBloom", parameters: ["inputImage":filter.outputImage!,
