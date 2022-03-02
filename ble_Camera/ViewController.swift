@@ -92,7 +92,12 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             //let out = map(value: v, minRange: 80, maxRange: 400, minDomain: 0, maxDomain: 32)
            // print(out)
             labelArduinoData.text = "\(v)"
-            self.incomingData = v
+            if(v < 1){
+                self.incomingData = 0
+            }else{
+                self.incomingData = v - 0.99
+            }
+           
       
         }
     }
@@ -179,7 +184,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
         let cameraImage = CIImage(cvImageBuffer: pixelBuffer!)
        // let x = map
-        let bloomIntensity = map(value:self.incomingData ?? 0 * 10, minRange: 0.0, maxRange: 100, minDomain: 0.0, maxDomain: 10)
+        let bloomIntensity = map(value:self.incomingData ?? 0 * 10, minRange: 0.0, maxRange: 100, minDomain: 0.0, maxDomain: 50)
         let x = map(value: self.incomingData ?? 0, minRange: 0.0, maxRange: 100, minDomain: 0.0, maxDomain: Float(cameraImage.extent.width))
         let v = CIVector(x: CGFloat(x), y: cameraImage.extent.height/2)
         let filter = CIFilter(name: "CIZoomBlur", parameters: ["inputImage": cameraImage,
