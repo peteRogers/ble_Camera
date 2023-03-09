@@ -105,7 +105,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2F88594F27CA2F2500C16949 /* Build configuration list for PBXProject "ble_Camera" */;
+			buildConfigurationList = 2F88594F27CA2F2500C16949 /* Build configuration list for PBXProject "blowCamera" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -296,6 +296,7 @@
 				DEVELOPMENT_TEAM = 4NY9EY68HK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ble_Camera/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = blowCamera;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "use bluetooth always";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "use bluetooth";
 				INFOPLIST_KEY_NSCameraUsageDescription = "use camera pls";
@@ -310,7 +311,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sprinkle.ble-Camera";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sprinkle.blowCamera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -328,6 +329,7 @@
 				DEVELOPMENT_TEAM = 4NY9EY68HK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ble_Camera/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = blowCamera;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "use bluetooth always";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "use bluetooth";
 				INFOPLIST_KEY_NSCameraUsageDescription = "use camera pls";
@@ -342,7 +344,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sprinkle.ble-Camera";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sprinkle.blowCamera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -353,7 +355,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2F88594F27CA2F2500C16949 /* Build configuration list for PBXProject "ble_Camera" */ = {
+		2F88594F27CA2F2500C16949 /* Build configuration list for PBXProject "blowCamera" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2F88596627CA2F2700C16949 /* Debug */,

@@ -17,7 +17,7 @@
                BlueprintIdentifier = "2F88595327CA2F2500C16949"
                BuildableName = "ble_Camera.app"
                BlueprintName = "ble_Camera"
-               ReferencedContainer = "container:ble_Camera.xcodeproj">
+               ReferencedContainer = "container:blowCamera.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,7 +47,7 @@
             BlueprintIdentifier = "2F88595327CA2F2500C16949"
             BuildableName = "ble_Camera.app"
             BlueprintName = "ble_Camera"
-            ReferencedContainer = "container:ble_Camera.xcodeproj">
+            ReferencedContainer = "container:blowCamera.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -64,7 +64,7 @@
             BlueprintIdentifier = "2F88595327CA2F2500C16949"
             BuildableName = "ble_Camera.app"
             BlueprintName = "ble_Camera"
-            ReferencedContainer = "container:ble_Camera.xcodeproj">
+            ReferencedContainer = "container:blowCamera.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
